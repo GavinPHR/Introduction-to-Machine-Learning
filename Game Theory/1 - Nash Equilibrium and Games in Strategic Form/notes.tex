@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{../../std_header}
+
+\begin{document}
+\title{Nash Equilibrium and Games in Strategic Form}
+\author{Haoran Peng}
+\maketitle
+A Nash Equilibrium (NE) is an $n$-tuple of strategies for the $n$ players such that no player can benefit by \textbf{unilaterally} deviating from its strategy. 
+
+"Unilaterally means" that the player switches its own strategy but all other players do not switch their strategies. "No player can benefit" means that no player can \textbf{strictly} increase its payoff.
+\\~\\
+\textbf{Nash's Theorem: } Every (finite) game has a mixed Nash equilibrium. 
+\\~\\
+A finite strategic form game $\Gamma$ with $n$-players consists of:
+\begin{itemize}
+\item A set $N = \{1,\ldots, n\}$ of players
+\item For each player $i\in N$, there is a finite set $S_i = \{1,\ldots, m\}$ of pure strategies.
+
+Let $S = S_1\times S_2\times \cdots \times S_n$ be the set of possible combinations of pure strategies.
+\item For each $i\in N$ a payoff function $u_i : S \mapsto \mathbb{R}$, describes the payoff $u_i(s_1, \ldots, s_n)$ to player $i$ under each strategy profile.
+\end{itemize}
+
+A mixed strategy $x_i$ for player $i$ is a probability distribution over $S_i$. Let $X_i$ be the set of mixed strategies for player $i$, then $X = X_1 \times \cdots\times X_n$ is the set of all possible profiles of mixed strategies.
+\\~\\
+Let $x\in X$ be a mixed strategy profile and $s \in S$ be a pure strategy profile. The probability of $s$ under $x$ is:
+\begin{align*}
+x(s) = \sum_{j=1}^{n} x_j(s_j)
+\end{align*}
+The expected payoff for player $i$ under a mixed strategy profile $x$ is:
+\begin{align*}
+U_i(x) = \sum_{s\in S} x(s) \times u_i(s)
+\end{align*} 
+Then an NE is a profile $x\in X$ such that for every player $i$ and for every $y_i \in X_i$ $\implies$ $U_i(x) \ge U_i(x_{-i}; y_i)$.
+\newpage
+Claim: A profile $x^*$ is an NE iff for every player $i$ and every pure strategy $\pi_{i,j}$ such that $j\in S_i$, $U_i(x^*)\ge U_i(x^*_{-i}; \pi_{i, j})$.
+
+Proof: If $x^*$ is an NE, it is obvious the inequality holds. In the other direction, first establish that:
+\begin{align*}
+U_i(x^*_{-i}; x_i) = \sum_{j=1}^{m_i} x_i(j) \times U_i(x^*_{-i}; \pi_{i,j})
+\end{align*}
+Then we since we know $U_i(x^*)\ge U_i(x^*_{-i}; \pi_{i, j})$:
+\begin{align*}
+\sum_{j=1}^{m_i} x_i(j) \times U_i(x^*) \ge	U_i(x^*_{-i}; x_i) = \sum_{j=1}^{m_i} x_i(j) \times U_i(x^*_{-i}; \pi_{i,j}) \\
+U_i(x^*) \ge	U_i(x^*_{-i}; x_i) = \sum_{j=1}^{m_i} x_i(j) \times U_i(x^*_{-i}; \pi_{i,j})
+\end{align*}
+\qed
+
+One can go on to prove Nash's Theorem from here, omitted. 
+
+\textbf{Useful Corollary for Nash Equilibria: }
+
+Since $U_i(x^*) = \sum_{j=1}^{m_i} x^*_i(j) \times U_i(x^*_{-i}; \pi_{i,j})$, we can see that $U_i(x^*) =U_i(x^*_{-i}; \pi_{i,j})$ whenever $x^*_i(j) > 0$. If this is not true, there necessarily exist some $U_i(x^*_{-i}; \pi_{i,j}) > U_i(x^*)$, thus a contradiction.
+\\~\\
+A 2-player game is symmetric if $S_1 = S_2$ (both players have the same strategy sets) and for all $s_1, s_2 \in S_1$, $u_1(s1, s2) = u_2(s2, s1)$. If the payoffs are written in a matrix $A$, then $A^T = A$. Every symmetric game has a symmetric NE, $(x^*_1,x^*_1)$.
+\\~\\
+A 2-player zero-sum game is a game where for all $s\in S$:
+\begin{align*}
+u_1(s) + u_2(s) = 0\\
+\text{i.e. } u_1(s) = -u_2(s)
+\end{align*}
+If player 1's payoff matrix is $A_1$ and player 2's is $A_2$, then $A_1 = -A_2$. Given only player 1's payoff matrix, player 1 wants to maximise it and player 2 wants to minimize it.
+
+Suppose player 1's payoff matrix is $A$. If player 1 chooses a mixed strategy $x_1$ (in vector form) and player 2 chooses mixed strategy $x_2$. Then for the profile $x = (x_1, x_2)$, the expected payoff is:
+\begin{align*}
+U_1(x) = -U_2(x) = x_1^TAx_2 
+\end{align*} 
+\newpage
+\textbf{The Minimax Theorem: } Let a two-player zero-sum game $\Gamma$ be given by a $m_1\times m_2$ matrix $A$ of real numbers. There exists an unique value $v^* \in \mathbb{R}$, such that there exists $x^* = (x^*_1, x^*_2) \in X$ such that:
+\begin{enumerate}
+\item $((x^*_1)^TA)_j \ge v*$ for $j \in \{1, \cdots, m_2\}$
+\item $(Ax^*_2)_j \le v*$ for $j \in \{1, \cdots, m_1\}$
+\item Thus $v^* = (x^*_1)^TAx^*_2$
+\item The above conditions hold when $x^*$ is any NE. 
+\end{enumerate} 
+We call any such $x^*$ a minimax profile and $v^*$ the minimax value.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

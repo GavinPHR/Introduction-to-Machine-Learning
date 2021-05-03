@@ -1,0 +1,15 @@
+# WIP ignores
+PyTorch C++ Tutorials
+test.ipynb
+
+# Latex
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+# Jupyter
+.ipynb_checkpoints
+
+# macOS
+.DS_Store

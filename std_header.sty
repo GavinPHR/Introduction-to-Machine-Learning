@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+% The common header I use to generate notes 
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}  
+%\usepackage{mathptmx}
+% Math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{bm}
+% Float
+\usepackage{float}
+% Code listings
+\usepackage[cache=true]{minted}
+\usemintedstyle{friendly}
+\newenvironment{code}{\VerbatimEnvironment\begin{minted}{python}}{\end{minted}}
+\newcommand{\icode}[1]{\mintinline{python}{#1}}  % inline code
+\setminted{mathescape, escapeinside=||}
+% Drawing
+\usepackage{nicematrix}
+\usepackage{tikz}
+\usetikzlibrary{fit}
+% Draw parse trees
+\usepackage{qtree}
+\renewcommand{\qtreepadding}{3pt}
+% Color
+\usepackage{xcolor}
+% Hyperref, must be imported last
+\usepackage{hyperref}
+% Drawing colored boxes around text
+\usepackage{tcolorbox}
+% Captions and subfigures
+\usepackage[format=hang]{caption}
+\usepackage{subcaption}
+% Parskip
+\usepackage{parskip}
