@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{../../std_header}
+
+\begin{document}
+	\title{Linear Programming and the Simplex Algorithm }
+	\author{Haoran Peng}
+	\maketitle
+
+A linear programming problem instance consists of:
+\begin{itemize}
+\item A linear objective function $f : \mathbb{R}^n \mapsto \mathbb{R}$:
+\begin{align*}
+f(x_1, \ldots, x_n) = c_1x_1 + c_2x_2 + \cdots + c_nx_n + d
+\end{align*}
+\item An optimization criterion: \texttt{Maximize/Minimize}
+\item A set $C(x_1, \ldots, x_n)$ of $m$ linear constraints. Each $C_i$, where $i = 1,\ldots, m$, has the following form:
+\begin{align*}
+c_{i,1}x_1 + c_{i,2}x_2 + \cdots + c_{i,n}x_n \ \Delta\ b_i
+\end{align*}
+where $\Delta \in \{\ge, \le, =\}$ and $a_{i,j}, b_i$ are rational numbers.
+\end{itemize}
+A vector $v$ satisfy $C_i$ if the constraint $C_i(v)$ holds true. A vector $v$ is a solution to the system $C$ if $v$ satisfies every constraint in $C$. Let $K(C)$ denotes the set of all solutions to a system. $C$ is feasible if $K(C) \neq \emptyset$. An optimal solution, for a maximization problem, is some $x^* \in K(C)$ such that:
+\begin{align*}
+f(x^*) = \max_{x\in K(C)} f(x)
+\end{align*}
+There can be 3 outcomes in solving a LP problem:
+\begin{itemize}
+\item The problem is infeasible (no solution)
+\item The problem is feasible (solution goes to infinity)
+\item An optimal feasible solution exists
+\end{itemize}
+~\\
+Geometric intuition on the simplex algorithm. An LP problem's feasible region can be seen as a convex polyhedron. The simplex algorithm pivots between different vertices of the polyhedron. Note that the problem is convex, the local minimum is the global minimum. If in every pivoting step, we can improve our solution, we just need to keep iterating until we find a vertex where no improvements can be made.
+\newpage
+\textbf{LP in Primal Form}
+
+We can convert any LP into the following form:
+
+Maximize: $ c_1x_1 + c_2x_2 + \cdots + c_nx_n + d$
+
+Subject to:
+\begin{align*}
+a_{1,1}x_1 + a_{1,2}x_2 + \cdots& + a_{1,n}x_n \le b_1 \\
+a_{2,1}x_1 + a_{2,2}x_2 + \cdots& + a_{2,n}x_n \le b_2 \\
+&\vdots \\
+a_{m, 1}x_1 + a_{m,2}x_2 +\cdots& + a_{m, n}x_n \le b_m 
+\end{align*}
+\begin{align*}
+x_1,\ldots, x_n \ge 0
+\end{align*}
+
+By adding slack variables, we can turn the LP into a standard form (a dictionary):
+\begin{align*}
+	a_{1,1}x_1 + a_{1,2}x_2 + \cdots& + a_{1,n}x_n + y_1= b_1 \\
+	a_{2,1}x_1 + a_{2,2}x_2 + \cdots& + a_{2,n}x_n +y_2= b_2 \\
+	&\vdots \\
+	a_{m, 1}x_1 + a_{m,2}x_2 +\cdots& + a_{m, n}x_n +y_m= b_m 
+\end{align*}
+\begin{align*}
+	x_1,\ldots, x_n \ge 0\\
+		y_1,\ldots, y_m \ge 0
+\end{align*}
+We also assume that $b_i \ge 0$ (if not, multiply both sides by -1). An LP in standard form has 3 properties:
+\begin{itemize}
+\item Every constraint has at least one variable with coefficient 1 that does not appear in other constraints
+\item Picking one such variable, $y_i$, from each constraint, we obtain a set of $m$ variables $B=\{y_1,\ldots,y_m\}$ called a basis.
+\item The objective function $f$ only involves non-basis variables.
+\end{itemize}
+\newpage
+\textbf{Dual LP}
+
+For a primal LP:
+
+Maximize: $c^Tx$
+
+Subject to: $Ax \le b, x \ge 0$
+\\~\\
+Its dual LP is:
+
+Minimize: $b^Ty$
+
+Subject to: $A^Ty \ge c, y \ge 0$
+
+\textbf{Weak LP duality}: If $x$ and $y$ are feasible solutions to the primal and dual LPs $\implies$ $c^Tx \le g^Ty$
+
+\textbf{Strong LP duality}: 
+\begin{itemize}
+\item If both primal and dual are feasible, and $x^*$ and $y^*$ are optimal solutions to the primal and dual LPs $\implies$ $c^Tx^* \le b^Ty^*$
+\item The primal is infeasible and the dual is unbounded
+\item The primal is unbounded and the dual is infeasible
+\item Both are infeasible
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
