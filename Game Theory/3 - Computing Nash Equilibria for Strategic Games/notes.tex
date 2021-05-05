@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{../../std_header}
+
+\begin{document}
+	\title{Computing Nash Equilibria for Strategic Games}
+	\author{Haoran Peng}
+	\maketitle
+
+Dominance: For two strategies $x_i, x_i'$, we say $x_i$ (weakly) dominates $x_i'$ if for all $x_{-i}$:
+\begin{align*}
+U_i(x_{-i}; x_i) \ge U_i(x_{-i}; x_i')
+\end{align*}
+We say $x_i$ strictly dominates $x_i'$ if for all $x_{-i}$:
+\begin{align*}
+	U_i(x_{-i}; x_i) > U_i(x_{-i}; x_i')
+\end{align*}
+
+An even stronger proposition is that $x_i$ dominates $x_i'$ if for all pure counter profiles $\pi_{-1}$:
+\begin{align*}
+	U_i(\pi_{-i}; x_i) \ge U_i(\pi_{-i}; x_i')
+\end{align*}
+
+A strategy  is \textbf{dominant} if it dominates every other strategy. A strategy is \textbf{dominated} if there exists at least one other strategy that dominates it.
+
+A strictly dominant strategy must be played in an NE, because the player should always want to switch to it.
+
+A strictly dominated strategy is clearly bad, and it does not make sense for a rational player to play such strategy. If we assume every play is rational and that each of them knows everyone else is rational: we can eliminate such strictly dominated strategy without eliminate any NE. Note that:
+\begin{itemize}
+\item NEs might be eliminated if weakly dominated strategies are eliminated
+\item A strategy can be dominated by mixed strategies
+\end{itemize}
+
+We can find the NEs of the game by iteratively eliminating strictly dominated strategies, and then find the NEs in the residual game.
+
+\newpage
+\textbf{Proposition: } In an $n$-player game, strategy profile $x^*$ is an NE iff there exists $w_1,\ldots,w_n \in \mathbb{R}$ (payoffs for every player) such that:
+\begin{itemize}
+\item $\forall$ player $i$, $\forall \pi_{i,j} \in$ support$(x^*_i)$, $U_i(x^*_{-i}; \pi_{i,j}) = w_i$
+\item $\forall$ player $i$, $\forall \pi_{i,j} \notin$ support$(x^*_i)$, $U_i(x^*_{-i}; \pi_{i,j}) \le w_i$
+\end{itemize}
+
+In a two-person game, we can enumerate all possible support sets, and solve LPs according to the above constraints. This enumeration is clearly in exponential time. Or use the Lemke-Howson algorithm to find 1 NE, omitted here.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
