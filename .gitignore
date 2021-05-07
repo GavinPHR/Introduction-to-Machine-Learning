@@ -11,5 +11,8 @@ test.ipynb
 # Jupyter
 .ipynb_checkpoints
 
+# Python
+__pycache__
+
 # macOS
 .DS_Store
