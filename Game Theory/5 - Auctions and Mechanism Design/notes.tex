@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{../../std_header}
+
+\begin{document}
+	\title{Auctions and Mechanism Design}
+	\author{Haoran Peng}
+	\maketitle
+Consider a single-item, sealed-bid auction as a game:
+\begin{itemize}
+\item Each of $n$ bidders is a player
+\item Each player $i$ has a valuation $v_i\in \mathbb{R}$ for the item being auctioned.
+\item If the outcome is that player $i$ wins the item and pay a price $pr$, then the payoff to player $i$ is $u_i(outcome) = v_i  - pr$, and the payoff to other players are 0.
+\item A reasonable constraint for such an auction would be that: given the bids $b = (b_1,\ldots,b_n)$, one of the highest bidders must win and pay a price $0 \le pr \le \max_i b_i$. It makes sense that the bidders who bid more should win and that they should not pay a price more than their bid (nor a negative price).
+\end{itemize}
+
+We want to design an auction such that every bidder bidding their true valuations $b_i = v_i$ is a dominant strategy.
+
+\textbf{Vickrey/Second-price auction: } The highest bidder, $j$, whose bid is $b_j = \max_i b_i$, gets the item, but pays the second highest bid price: $pr = \max_{i\neq j} b_i$. Bidding the true valuation is a weakly dominant strategy for all players (irrespective of what other players do).
+
+To prove this, we split the scenarios into cases:
+\begin{itemize}
+\item If the player is bidding their true valuation and wins the item:
+\begin{enumerate}
+ \item if they bid higher, they still win and pay the second-price with non-negative utility
+ \item if they bid a little lower (still above second-price), they still win and pay the second-price with non-negative utility
+ \item if they bid sufficiently lower (below second-price) , they lose and receive 0 utility
+\end{enumerate}
+\item If the player is bidding their true valuation and loses the item:
+\begin{enumerate}
+\item if they bid a little higher (still lower than first-price), they still lose and receive 0 utility
+\item if they bid sufficiently higher (higher than first-price), they win but with negative utility
+\item if they bid lower, they still lose and receive 0 utility
+\end{enumerate}
+\end{itemize}
+So clearly, bidding the true valuation is a weakly dominant strategy for any player, because they can not strictly increase their payoff. 
+
+This strategy is not dominant in a first-price auction because the winning person can potentially bid less than their true valuation and still win the item.
+\\~\\
+\textbf{Bayesian Games}
+
+A Bayesian game has:
+\begin{itemize}
+\item A set of $N = \{1,\ldots, n\}$ players
+\item A set $A_i$ of actions for each player
+\item A set of possible types $T_i$ for each player
+\item A payoff function for each player:
+\begin{align*}
+u_i: A_1\times \cdots \times A_n \times T_1 \times \cdots \times T_n \mapsto \mathbb{R}
+\end{align*} 
+\item A joint probability distribution over types (common prior):
+\begin{align*}
+p : T_1 \times \cdots \times T_n \mapsto[0, 1]
+\end{align*}
+where the probability sum to 1.
+\end{itemize}
+
+A pure strategy for a player is a function $s_i: T_i\mapsto A_i$. This means a player knows its own type $t_i$ and chooses action $s_i(t_i)$. Player's types are chosen randomly according to $p$. Player $i$ knows its type but not others' types, but everyone knows $p$ and compute $p(t_{-i}\mid t_i)$ (likelihood of others' types given its type). The expected payoff for to player $i$ under the pure strategy profile $s$ is:
+\begin{align*}
+U_i(s, t_i) = \sum_{t_{-i}} p(t_{-i}\mid t_i)u_i(s_1(t_1),\ldots, s_n(t_n), t_i, t_{-i})
+\end{align*}
+A Bayesian NE is similarly defined. Every finite Bayesian game has a Bayesian NE. 
+\newpage
+\textbf{The Vickrey-Clarke-Groves (VCG) Auction}
+Generalization of the Vickrey auction
+\\~\\
+Define a multi-item sealed-bid auction:
+\begin{itemize}
+\item Let $V$ be a set of bidders
+\item Let $C$ be a set of outcomes (an outcome is e.g. bidder 1 gets item 3 and 4, bidder 2 gets item 1, etc.)
+\item Each bidder $i \in V$ has a value function $v_i:C\mapsto \mathbb{R}_{\ge 0}$ which indicates the amount of money it is worth to bidder $i$ if $c$ is the winning outcome
+\end{itemize}
+Suppose we want to find an outcome $c^*$ that maximizes the total value for all the bidders:
+\begin{align*}
+f(v_i,\ldots,v_n) = c^* \in \arg \max_c \sum_{i\in V} v_i(c)
+\end{align*}
+But bidders can lie about their true valuation and we want to incentivise them tell the truth. In a VCG auction:
+\begin{itemize}
+\item Each bidder submits its valuation $v'$ ($v'$ might not be their true valuation $v$)
+\item The auction computes the optimal outcome:
+\begin{align*}
+	f(v_i',\ldots,v_n') = c^* \in \arg \max_c \sum_{k\in V} v_k'(c)
+\end{align*}
+\item Each bidder $i$ pays an amount $p_i(c^*)$ which is independent of $v_i$:
+\begin{align*}
+p_i(c^*) = \left( \max_{c'\in C} \sum_{j\in V\backslash \{i\}}  v'_j(c')\right) - \sum_{j\in V\backslash \{i\}}  v'_j(c^*)
+\end{align*}
+The first term is the sum valuation of the best outcome \textbf{without} bidder $i$'s presence, the second term is the sum valuation of the other bidders with bidder $i$'s presence. So bidder $i$ pays the price it costs other bidders by joining the auction.
+\end{itemize}
+A VCG auction is incentive-compatible and it is a weakly dominant strategy for each bidder to submit their true valuation. Proof is mostly mathematical manipulation, omitted here.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

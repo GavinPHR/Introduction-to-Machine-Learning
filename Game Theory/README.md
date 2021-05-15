@@ -8,7 +8,6 @@ We covered the basics of game theory including:
 - Zero sum games
 - Linear programming and the simplex algorithm
 - Congestion games
-- Bayesian games and Vickery auctions
-- VCG mechanism and generalized second price auctions
+- Bayesian games, Vickrey and VCG auctions
 
 This is one of the most interesting courses in my undergraduate degree with broad applications. Though most of the topics taught assume agents are self-interested and rational, far from what the real world is like. 
