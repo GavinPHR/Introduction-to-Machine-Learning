@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{../../std_header}
+
+\begin{document}
+	\title{Miscellaneous}
+	\author{Haoran Peng}
+	\maketitle
+Bimatrix game solver: 
+\begin{itemize}
+\item \url{https://intranet.csc.liv.ac.uk/cgi-bin/cgiwrap/rahul/input.py}
+\item \url{https://bimatrix.herokuapp.com/}
+\end{itemize}
+\textbf{General recipe for LP duals: }
+
+\begin{minipage}{0.5\textwidth}
+Primal: Maximize $c^Tx$
+\begin{align*}
+(Ax)_i \le b_i, i = 1,\ldots, d\\
+(Ax)_i = b_i, i = d+1,\ldots, m\\
+x_1, \ldots, x_r \ge0
+\end{align*}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+Dual: Minimize $b^Ty$
+\begin{align*}
+	(A^Ty)_i \ge c_j, j = 1,\ldots, r\\
+	(A^Ty)_j = b_j, j = r+1,\ldots, n\\
+	y_1, \ldots, y_d \ge0
+\end{align*}
+\end{minipage}
+If the variables $x_1,\ldots, x_r$ are constrained to positive in the primal, than the constraints $(A^Ty)_j, j = 1,\ldots,r$ in the dual are inequalities. If some variables in the primal are unconstrained, then the constraints in the dual are equalities. Also goes the other way because the dual of the dual is the primal.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
