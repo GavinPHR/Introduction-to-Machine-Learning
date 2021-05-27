@@ -1,5 +1,4 @@
 # WIP ignores
-PyTorch C++ Tutorials
 test.ipynb
 
 # Latex
@@ -16,3 +15,6 @@ __pycache__
 
 # macOS
 .DS_Store
+
+# C++ Build
+build
