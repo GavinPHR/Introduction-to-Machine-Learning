@@ -1,0 +1,1 @@
+This folder contains notes I made when reading Goodfellow's Deep Learning book `https://www.deeplearningbook.org/`. 

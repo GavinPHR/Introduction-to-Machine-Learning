@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{../../std_header}
+
+\begin{document}
+\title{Principal Components Analysis}
+\author{Haoran Peng}
+\maketitle
+
+Problem:
+\begin{itemize}
+\item Have a set of points $\{x^{(1)},\ldots, x^{(m)}\}$ in $\mathbb{R}^n$ 
+\item Want to lossy compress them using function $f$, s.t. $f(x) = c \in \mathbb{R}^l$
+\item Then reconstruct them back using function $g$, so that $x \approx g(f(x))$. Let $g(c) = Dc$ where $D\in \mathbb{R}^{n\times l}$ have orthogonal columns
+\end{itemize}
+It is more often formulated as dimensionality reduction that maximizes variance of the data.
+
+If we have one point, the objective is to minimize the $L^2$ norm:
+\begin{align*}
+c^* &= \arg \min_c || x - g(c)||_2\\
+&= \arg \min_c || x - g(c)||_2^2\\
+&= \arg \min_c (x - g(c))^\top(x - g(c))\\
+&=\arg\min_c x^\top x - 2x^\top g(c)  + g(c)^\top g(c)\\
+c^* &=\arg\min_c  - 2x^\top g(c)  + g(c)^\top g(c)\\
+&=\arg\min_c  - 2x^\top Dc  + c^\top D^\top Dc\\
+&=\arg\min_c  - 2x^\top Dc  + c^\top c\\
+\end{align*}
+Solve by differentiation:
+\begin{align*}
+\nabla_c - 2x^\top Dc  + c^\top c &= 0\\
+- 2D^\top x  + 2 c &= 0\\
+c &= D^\top x\\
+\end{align*}
+This makes $f(x) = D^\top x$ and $g(f(x)) = DD^\top x = x$, a perfect reconstruction.
+
+For all the points $X$ (with stacked $x^{(i)}$), we minimize (where $D^TD = I$):
+\begin{align*}
+	D^* &= \arg \min_D || X - X D D^\top||_F^2
+\end{align*}
+Take the special $l=1$ case (first principle component):
+\begin{align*}
+	d^* &= \arg \min_d || X - X d d^\top||_F^2\\
+	&=  \arg \min_d  \text{Tr} ((X - X d d^\top)^\top (X - X d d^\top))\\
+	&=  \arg \min_d  -\text{Tr}(X^\top X d d^\top) -\text{Tr}(dd^\top X^\top X) + \text{Tr}(dd^\top X^\top X d d^\top) \\
+	&=  \arg \min_d  -2\text{Tr}(X^\top X d d^\top) + \text{Tr}(dd^\top X^\top X d d^\top) \\
+	&=  \arg \min_d  -2\text{Tr}(X^\top X d d^\top) + \text{Tr}( X^\top X d d^\top dd^\top) \\
+	&=  \arg \min_d  -2\text{Tr}(X^\top X d d^\top) + \text{Tr}( X^\top X d d^\top) \\
+    &=  \arg \min_d  -\text{Tr}(X^\top X d d^\top) \\
+    &=  \arg \max_d  \text{Tr}(X^\top X d d^\top) \\
+    &=  \arg \max_d   \text{Tr}(d^\top X^\top X d)  \\
+    &=  \arg \max_d  \frac{d^\top X^\top X d}{d^\top d}
+\end{align*}
+This the the form of a Reyleigh quotient. The largest $d$ is the eigenvector of $X^\top X$ that corresponds to the largest eigenvalue. Calculating the product $X\top X$ is sometimes not easy. We can instead do SVD on $X$:
+\begin{align*}
+	X &= U\Sigma V^\top \\
+	X^\top X &= V \Sigma^\top U^\top  U \Sigma V^\top\\
+	X^\top X &= V\Sigma^2V^\top 
+\end{align*}
+Which means V are the eigenvectors of $X^\top X$ and the projections are:
+\begin{align*}
+XV = U\Sigma V^\top V = U\Sigma
+\end{align*}
+It is also standard to center data before doing PCA.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
