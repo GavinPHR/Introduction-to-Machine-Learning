@@ -49,7 +49,7 @@ Take the special $l=1$ case (first principle component):
     &=  \arg \max_d   \text{Tr}(d^\top X^\top X d)  \\
     &=  \arg \max_d  \frac{d^\top X^\top X d}{d^\top d}
 \end{align*}
-This the the form of a Reyleigh quotient. The largest $d$ is the eigenvector of $X^\top X$ that corresponds to the largest eigenvalue. Calculating the product $X\top X$ is sometimes not easy. We can instead do SVD on $X$:
+This the the form of a Reyleigh quotient. The $d$ that maximizes the expression is the eigenvector of $X^\top X$ that corresponds to the largest eigenvalue. Calculating the product $X\top X$ is sometimes not easy. We can instead do SVD on $X$:
 \begin{align*}
 	X &= U\Sigma V^\top \\
 	X^\top X &= V \Sigma^\top U^\top  U \Sigma V^\top\\
